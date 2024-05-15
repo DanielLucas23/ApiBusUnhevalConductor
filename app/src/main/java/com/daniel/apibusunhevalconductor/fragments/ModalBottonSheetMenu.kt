@@ -53,7 +53,7 @@ class ModalBottonSheetMenu: BottomSheetDialogFragment() {
         getConductor()
         linearLayoutLogout?.setOnClickListener { goToMain() }
         linearLayoutProfile?.setOnClickListener { goToProfile() }
-        linearLayoutHistory?.setOnClickListener { goToHistories() }
+        linearLayoutHistory?.setOnClickListener { goToEditConsultas() }
 
         return view
     }
@@ -63,9 +63,9 @@ class ModalBottonSheetMenu: BottomSheetDialogFragment() {
         startActivity(i)
     }
 
-    private fun goToHistories(){
-        val i = Intent(activity, HistoriesActivity::class.java)
-        startActivity(i)
+    private fun goToEditConsultas(){
+        // val i = Intent(activity, HistoriesActivity::class.java)
+        // startActivity(i)
     }
 
     private fun goToMain(){

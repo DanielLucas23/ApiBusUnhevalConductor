@@ -41,7 +41,7 @@
                     <ImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:src="@drawable/ic_person"/>
+                        android:src="@drawable/ic_admin"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -61,12 +61,13 @@
                     <ImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:src="@drawable/ic_history"/>
+                        android:src="@drawable/ic_microedit"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Historial" />
+                        android:textAlignment="center"
+                        android:text="Editar Asistente de Voz" />
 
                 </LinearLayout>
 
@@ -81,7 +82,7 @@
                     <ImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:src="@drawable/ic_power"/>
+                        android:src="@drawable/ic_apagar"/>
 
                     <TextView
                         android:layout_width="wrap_content"
