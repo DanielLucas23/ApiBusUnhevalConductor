@@ -62,7 +62,7 @@ class ConductorProvider {
         map["name"] = conductor?.name!!
         map["lastname"] = conductor?.lastname!!
         map["phone"] = conductor?.phone!!
-        map["brandcar"] = conductor?.brandcar!!
+        map["rutcar"] = conductor?.rutcar!!
         map["colorcar"] = conductor?.colorcar!!
         map["platenumber"] = conductor?.platenumber!!
         map["image"] =conductor?.image!!

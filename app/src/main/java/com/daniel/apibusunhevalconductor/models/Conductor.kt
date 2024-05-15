@@ -13,7 +13,7 @@ data class Conductor (
     var image: String? = null,
     val platenumber: String? = null,
     val colorcar: String? = null,
-    val brandcar: String? = null,
+    val rutcar: String? = null,
     var token: String? = null
 ) {
 

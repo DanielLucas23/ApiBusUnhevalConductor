@@ -144,10 +144,10 @@
             app:startIconTint="@color/grisoscuro">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textCarBrand"
+                android:id="@+id/textRutCar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Marca del Vehiculo"
+                android:hint="Ruta del Bus"
                 android:textColorHint="@color/grisoscuro"
                 android:inputType="text"
                 android:textSize="13sp"
@@ -169,7 +169,7 @@
                 android:id="@+id/textColorCar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Color del Vehiculo"
+                android:hint="Color del Bus"
                 android:textColorHint="@color/grisoscuro"
                 android:inputType="text"
                 android:textSize="13sp"
@@ -191,7 +191,7 @@
                 android:id="@+id/textCarPlate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Placa del Vehiculo"
+                android:hint="Placa del Bus"
                 android:textColorHint="@color/grisoscuro"
                 android:inputType="text"
                 android:textSize="13sp"

@@ -41,7 +41,7 @@ class ProfileActivity : AppCompatActivity() {
         val name = binding.textFieldName.text.toString()
         val lastname = binding.textFieldLastName.text.toString()
         val phone = binding.textFieldPhone.text.toString()
-        val carBrand = binding.textCarBrand.text.toString()
+        val carRut = binding.textRutCar.text.toString()
         val carColor = binding.textColorCar.text.toString()
         val carPlate = binding.textCarPlate.text.toString()
 
@@ -51,7 +51,7 @@ class ProfileActivity : AppCompatActivity() {
             lastname = lastname,
             phone = phone,
             colorcar = carColor,
-            brandcar = carBrand,
+            rutcar = carRut,
             platenumber = carPlate
         )
 
@@ -99,7 +99,7 @@ class ProfileActivity : AppCompatActivity() {
                 binding.textFieldLastName.setText(conductor?.lastname)
                 binding.textFieldPhone.setText(conductor?.phone)
                 binding.textFieldName.setText(conductor?.name)
-                binding.textCarBrand.setText(conductor?.brandcar)
+                binding.textRutCar.setText(conductor?.rutcar)
                 binding.textColorCar.setText(conductor?.colorcar)
                 binding.textCarPlate.setText(conductor?.platenumber)
 
