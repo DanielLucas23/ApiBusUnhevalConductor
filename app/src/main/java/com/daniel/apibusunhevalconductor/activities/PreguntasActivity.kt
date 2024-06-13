@@ -104,6 +104,9 @@ class PreguntasActivity : AppCompatActivity(), PreguntasAdapter.OnItemClickListe
                 .add(data)
                 .addOnSuccessListener {
                     Toast.makeText(this,"Registro exitoso", Toast.LENGTH_SHORT).show()
+                    // Limpiar los campos después del registro exitoso
+                    txt_pregunta.text = ""
+                    txt_respuesta.text = ""
                     consultarColeccion()
                 }
                 .addOnFailureListener { e -> }

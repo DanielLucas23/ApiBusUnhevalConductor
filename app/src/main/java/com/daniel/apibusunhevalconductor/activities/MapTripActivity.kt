@@ -470,7 +470,6 @@ class MapTripActivity : AppCompatActivity(), OnMapReadyCallback,Listener, Direct
                 bookingProvider.updateStatus(booking?.idEstudiante!!, "finished").addOnCompleteListener {
                     if (it.isSuccessful){
                         sendNotification("Ruta a Ambo Terminado")
-                        goToCalificationClient()
                     }
                 }
 
@@ -478,11 +477,7 @@ class MapTripActivity : AppCompatActivity(), OnMapReadyCallback,Listener, Direct
         }
     }
 
-    private fun goToCalificationClient(){
-        val i = Intent(this,CalificationClientActivity::class.java)
-        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(i)
-    }
+
 
     override fun locationOn() {
 

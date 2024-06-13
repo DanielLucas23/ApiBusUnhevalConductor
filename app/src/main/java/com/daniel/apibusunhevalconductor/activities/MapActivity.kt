@@ -32,6 +32,7 @@ import com.daniel.apibusunhevalconductor.models.Booking
 import com.daniel.apibusunhevalconductor.models.Estudiante
 import com.daniel.apibusunhevalconductor.models.FCMBody
 import com.daniel.apibusunhevalconductor.models.FCMResponse
+import com.daniel.apibusunhevalconductor.models.Preguntas
 import com.daniel.apibusunhevalconductor.providers.AuthProvider
 import com.daniel.apibusunhevalconductor.providers.BookingProvider
 import com.daniel.apibusunhevalconductor.providers.ConductorProvider
@@ -53,6 +54,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import retrofit2.Call
 import retrofit2.Callback
@@ -76,6 +78,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, Listener, SensorEve
     private val estudianteProvider = EstudianteProvider()
     private val modalBooking = ModalBottonSheetBooking()
     private val modalMenu = ModalBottonSheetMenu()
+
+    private val db = FirebaseFirestore.getInstance()
+    private val tuCollection = db.collection("Conductores")
 
     //SENSOR CAMERA
     private var angle = 0
@@ -227,7 +232,18 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, Listener, SensorEve
         easyWayLocation?.endUpdates() // OTROS HILOS DE EJECUCION
         easyWayLocation?.startLocation()
         showButtonDisconnect()
-        sendNotification("El bus hacia Ambo saldrá en 10 minutos")   //Enviar Notificación al alumno
+        tuCollection.get()
+            .addOnSuccessListener {
+                for (document in it){
+                    val ruta = document.getString("rutcar")
+                    val ID = document.id
+                    val idc = authProvider.getId()
+                    if(ruta != null && ID == idc){
+                        sendNotification("El bus hacia $ruta saldrá en 10 minutos") //Enviar Notificación al alumno
+                    }
+                }
+            }
+
     }
 
     private fun showButtonConnect() {
@@ -260,33 +276,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, Listener, SensorEve
         }
 
     }
-    /*
-    private fun getBooking(){
-        bookingProvider.getBooking().get().addOnSuccessListener {query ->
-
-            if (query != null){
-                if (query.size() > 0){
-                    booking = query.documents[0].toObject(Booking::class.java)
-                    Log.d("FIRESTORE", "BOOKING: ${booking?.toJson()}")
-                    getEstudianteInfo()
-                }
-            }
-
-        }
-    }
-    */
-
-    /*
-    private fun getEstudianteInfo(){
-        estudianteProvider.getClienById(booking?.idEstudiante!!).addOnSuccessListener { document ->
-            if (document.exists()){
-                estudiante = document.toObject(Estudiante::class.java)
-                Log.d("FIRESTORE", "ESTUDIANTE: ${estudiante}")
-            }
-
-        }
-    }
-    */
 
     private fun sendNotification(status: String){
 
@@ -359,7 +348,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, Listener, SensorEve
             }
 
         }catch (e: Resources.NotFoundException){
-            Log.d("MAPAS", "Erro: ${e.toString()}")
+            Log.d("MAPAS", "Error: ${e.toString()}")
         }
 
     }
