@@ -17,6 +17,7 @@ import com.daniel.apibusunhevalconductor.activities.HistoriesActivity
 import com.daniel.apibusunhevalconductor.activities.MainActivity
 import com.daniel.apibusunhevalconductor.activities.MapActivity
 import com.daniel.apibusunhevalconductor.activities.MapTripActivity
+import com.daniel.apibusunhevalconductor.activities.PreguntasActivity
 import com.daniel.apibusunhevalconductor.activities.ProfileActivity
 import com.daniel.apibusunhevalconductor.models.Booking
 import com.daniel.apibusunhevalconductor.models.Conductor
@@ -35,7 +36,7 @@ class ModalBottonSheetMenu: BottomSheetDialogFragment() {
     var textViewUserName: TextView? = null
     var linearLayoutLogout: LinearLayout? = null
     var linearLayoutProfile: LinearLayout? = null
-    var linearLayoutHistory: LinearLayout? = null
+    var linearLayoutEdit: LinearLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,13 +48,13 @@ class ModalBottonSheetMenu: BottomSheetDialogFragment() {
         textViewUserName = view.findViewById(R.id.textViewUserName)
         linearLayoutLogout = view.findViewById(R.id.linearLayoutLogout)
         linearLayoutProfile = view.findViewById(R.id.linearLayoutProfile)
-        linearLayoutHistory = view.findViewById(R.id.linearLayoutHistori)
+        linearLayoutEdit = view.findViewById(R.id.linearLayoutEditarAsistente)
 
 
         getConductor()
         linearLayoutLogout?.setOnClickListener { goToMain() }
         linearLayoutProfile?.setOnClickListener { goToProfile() }
-        linearLayoutHistory?.setOnClickListener { goToEditConsultas() }
+        linearLayoutEdit?.setOnClickListener { goToEditConsultas() }
 
         return view
     }
@@ -64,8 +65,8 @@ class ModalBottonSheetMenu: BottomSheetDialogFragment() {
     }
 
     private fun goToEditConsultas(){
-        // val i = Intent(activity, HistoriesActivity::class.java)
-        // startActivity(i)
+         val i = Intent(activity, PreguntasActivity::class.java)
+         startActivity(i)
     }
 
     private fun goToMain(){

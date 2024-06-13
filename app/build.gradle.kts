@@ -74,6 +74,7 @@ dependencies {
 
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("com.airbnb.android:lottie:5.2.0")
+    implementation("androidx.activity:activity:1.9.0")
 
 
     testImplementation("junit:junit:4.13.2")
