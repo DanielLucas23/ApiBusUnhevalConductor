@@ -2,10 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.PreguntasActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondoestudiante"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:alpha="0.6" />
 
     <TextView
         android:id="@+id/title"
@@ -13,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="PREGUNTAS Y RESPUESTAS"
-        android:textColor="@color/black"
+        android:textColor="@color/blue"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -26,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="ID"
+        android:textColor="#FF5722"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.097"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Pregunta"
+        android:textColor="#00157C"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,25 +62,27 @@
 
     <EditText
         android:id="@+id/txt_Pregunta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_width="356dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="text"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.189"
+        app:layout_constraintHorizontal_bias="0.69"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/txt_Respuesta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_width="351dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="text"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintHorizontal_bias="0.633"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -72,6 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Respuesta"
+        android:textColor="#0D8845"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,23 +100,27 @@
 
     <Button
         android:id="@+id/btn_Consultar"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/green"
         android:text="Recargar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.149"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnActualizar" />
 
     <Button
         android:id="@+id/btn_Insertar"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/orange"
         android:text="Insertar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.77"
+        app:layout_constraintHorizontal_bias="0.892"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEliminar" />
 
@@ -111,23 +136,26 @@
 
     <Button
         android:id="@+id/btnActualizar"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_button"
         android:text="Editar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.195"
+        app:layout_constraintHorizontal_bias="0.145"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_Respuesta" />
 
     <Button
         android:id="@+id/btnEliminar"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/red"
         android:text="Eliminar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.77"
+        app:layout_constraintHorizontal_bias="0.892"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_Respuesta" />
 

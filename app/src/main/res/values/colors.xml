@@ -5,6 +5,7 @@
     <color name="green">#D0F629</color>
     <color name="blue">#00A5FD</color>
     <color name="gris">#BCBCBC</color>
-    <color name="red">#FB263E</color>
+    <color name="red">#E40035</color>
     <color name="grisoscuro">#2E2E2E</color>
+    <color name="orange">#FF5733</color>
 </resources>
