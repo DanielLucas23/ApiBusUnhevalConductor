@@ -19,6 +19,8 @@ class PreguntasActivity : AppCompatActivity(), PreguntasAdapter.OnItemClickListe
     private val tuCollection = db.collection("Preguntas")
     private lateinit var recycleView: RecyclerView
     private lateinit var adapter: PreguntasAdapter
+    private val listaTuModelo = mutableListOf<Preguntas>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -45,6 +47,7 @@ class PreguntasActivity : AppCompatActivity(), PreguntasAdapter.OnItemClickListe
         btnConsultar.setOnClickListener {
             consultarColeccion()
         }
+
         btnInsertar.setOnClickListener {
             insertarColeccion()
         }
@@ -54,13 +57,13 @@ class PreguntasActivity : AppCompatActivity(), PreguntasAdapter.OnItemClickListe
         val txt_id: TextView = findViewById(R.id.txt_ID)
         val txt_pregunta: TextView = findViewById(R.id.txt_Pregunta)
         val txt_respuesta: TextView = findViewById(R.id.txt_Respuesta)
-        var IDD: String = txt_id.text.toString()
+        val IDD: String = txt_id.text.toString()
 
         tuCollection.document(IDD)
             .delete()
             .addOnSuccessListener {
                 Toast.makeText(this,"Eliminado correctamente", Toast.LENGTH_SHORT).show()
-                //Limpiar campos
+                // Limpiar campos
                 txt_id.text = "ID"
                 txt_pregunta.text = ""
                 txt_respuesta.text = ""
@@ -78,76 +81,80 @@ class PreguntasActivity : AppCompatActivity(), PreguntasAdapter.OnItemClickListe
         val txt_respuesta: TextView = findViewById(R.id.txt_Respuesta)
         val txt_id: TextView = findViewById(R.id.txt_ID)
 
-        var pre:String = txt_pregunta.text.toString()
-        var res:String = txt_respuesta.text.toString()
-        var IDD: String = txt_id.text.toString()
+        val pre = txt_pregunta.text.toString()
+        val res = txt_respuesta.text.toString()
+        val IDD: String = txt_id.text.toString()
         val docActualizado = HashMap<String, Any>()
-        docActualizado["pregunta"]=pre
-        docActualizado["respuesta"]=res
+        docActualizado["pregunta"] = pre
+        docActualizado["respuesta"] = res
         tuCollection.document(IDD)
             .update(docActualizado)
             .addOnSuccessListener {
                 Toast.makeText(this,"Actualización exitosa", Toast.LENGTH_SHORT).show()
-                //Limpiar campos
+                // Limpiar campos
                 txt_id.text = "ID"
                 txt_pregunta.text = ""
                 txt_respuesta.text = ""
                 // Mover el foco a la primera caja de texto
                 txt_pregunta.requestFocus()
-
                 consultarColeccion()
             }
-            .addOnFailureListener {e->
+            .addOnFailureListener { e->
                 Toast.makeText(this,"Error: " + e.message, Toast.LENGTH_SHORT).show()
             }
     }
 
     private fun insertarColeccion() {
-        val db = FirebaseFirestore.getInstance()
         val txt_pregunta: TextView = findViewById(R.id.txt_Pregunta)
         val txt_respuesta: TextView = findViewById(R.id.txt_Respuesta)
-        var pre:String = txt_pregunta.text.toString()
-        var res:String = txt_respuesta.text.toString()
+        val pre = txt_pregunta.text.toString()
+        val res = txt_respuesta.text.toString()
 
-        if (pre != "" && res != ""){
-
+        if (pre.isNotEmpty() && res.isNotEmpty()) {
             val data = hashMapOf(
                 "pregunta" to pre,
                 "respuesta" to res
             )
             db.collection("Preguntas")
                 .add(data)
-                .addOnSuccessListener {
-                    Toast.makeText(this,"Registro exitoso", Toast.LENGTH_SHORT).show()
+                .addOnSuccessListener { documentReference ->
+                    Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
                     // Limpiar los campos después del registro exitoso
                     txt_pregunta.text = ""
                     txt_respuesta.text = ""
                     // Mover el foco a la primera caja de texto
                     txt_pregunta.requestFocus()
-                    consultarColeccion()
+                    // Agregar el nuevo item a la lista y notificar al adapter
+                    listaTuModelo.add(Preguntas(documentReference.id, pre, res))
+                    adapter.setDatos(listaTuModelo)
+                    // Desplazar el RecyclerView al final
+                    recycleView.scrollToPosition(listaTuModelo.size - 1)
                 }
-                .addOnFailureListener { e -> }
-        }else{
+                .addOnFailureListener { e ->
+                    Toast.makeText(this,"Error: " + e.message, Toast.LENGTH_SHORT).show()
+                }
+        } else {
             Toast.makeText(this,"Rellene los campos", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun consultarColeccion(){
+    private fun consultarColeccion() {
         tuCollection.get()
-            .addOnSuccessListener {
-                val listaTuModelo = mutableListOf<Preguntas>()
-                for (document in it){
+            .addOnSuccessListener { result ->
+                listaTuModelo.clear()
+                for (document in result) {
                     val pregunta = document.getString("pregunta")
                     val respuesta = document.getString("respuesta")
                     val ID = document.id
-                    if(pregunta != null && respuesta != null){
-                        val tuModelo = Preguntas(ID,pregunta,respuesta)
-                        listaTuModelo.add((tuModelo))
+                    if (pregunta != null && respuesta != null) {
+                        val tuModelo = Preguntas(ID, pregunta, respuesta)
+                        listaTuModelo.add(tuModelo)
                     }
                 }
-
                 adapter.setDatos(listaTuModelo)
-
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this,"Error: " + e.message, Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -156,8 +163,8 @@ class PreguntasActivity : AppCompatActivity(), PreguntasAdapter.OnItemClickListe
         val txt_respuesta: TextView = findViewById(R.id.txt_Respuesta)
         val txt_id: TextView = findViewById(R.id.txt_ID)
 
-        txt_pregunta.text=tuModelo.pregunta
-        txt_respuesta.text=tuModelo.respuesta
-        txt_id.text=tuModelo.id
+        txt_pregunta.text = tuModelo.pregunta
+        txt_respuesta.text = tuModelo.respuesta
+        txt_id.text = tuModelo.id
     }
 }

@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Pregunta"
-        android:textColor="#00157C" />
+        android:textColor="@color/blue" />
 
     <TextView
         android:id="@+id/txtRespuesta"
