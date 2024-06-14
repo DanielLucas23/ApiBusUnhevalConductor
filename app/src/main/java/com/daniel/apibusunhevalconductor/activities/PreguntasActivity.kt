@@ -52,12 +52,20 @@ class PreguntasActivity : AppCompatActivity(), PreguntasAdapter.OnItemClickListe
 
     private fun eliminarColeccion() {
         val txt_id: TextView = findViewById(R.id.txt_ID)
+        val txt_pregunta: TextView = findViewById(R.id.txt_Pregunta)
+        val txt_respuesta: TextView = findViewById(R.id.txt_Respuesta)
         var IDD: String = txt_id.text.toString()
 
         tuCollection.document(IDD)
             .delete()
             .addOnSuccessListener {
                 Toast.makeText(this,"Eliminado correctamente", Toast.LENGTH_SHORT).show()
+                //Limpiar campos
+                txt_id.text = "ID"
+                txt_pregunta.text = ""
+                txt_respuesta.text = ""
+                // Mover el foco a la primera caja de texto
+                txt_pregunta.requestFocus()
                 consultarColeccion()
             }
             .addOnFailureListener { e->
@@ -80,6 +88,13 @@ class PreguntasActivity : AppCompatActivity(), PreguntasAdapter.OnItemClickListe
             .update(docActualizado)
             .addOnSuccessListener {
                 Toast.makeText(this,"Actualización exitosa", Toast.LENGTH_SHORT).show()
+                //Limpiar campos
+                txt_id.text = "ID"
+                txt_pregunta.text = ""
+                txt_respuesta.text = ""
+                // Mover el foco a la primera caja de texto
+                txt_pregunta.requestFocus()
+
                 consultarColeccion()
             }
             .addOnFailureListener {e->
@@ -107,6 +122,8 @@ class PreguntasActivity : AppCompatActivity(), PreguntasAdapter.OnItemClickListe
                     // Limpiar los campos después del registro exitoso
                     txt_pregunta.text = ""
                     txt_respuesta.text = ""
+                    // Mover el foco a la primera caja de texto
+                    txt_pregunta.requestFocus()
                     consultarColeccion()
                 }
                 .addOnFailureListener { e -> }
