@@ -44,10 +44,11 @@ class RegisterActivity : AppCompatActivity() {
         val lastname = binding.textFieldLastName.text.toString()
         val phone = binding.textFieldPhone.text.toString()
         val email = binding.textFieldEmail.text.toString()
+        val ruta = binding.textFieldRut.text.toString()
         val password = binding.textFieldPassword.text.toString()
         val confirmpasswor =binding.textFieldConfirmPassword.text.toString()
 
-        if (isValidForm(name, lastname, phone, email, password, confirmpasswor)){
+        if (isValidForm(name, lastname, phone, email, ruta, password, confirmpasswor)){
             authProvider.register(email, password).addOnCompleteListener {
                 if (it.isSuccessful){
                     val conductor = Conductor(
@@ -55,7 +56,8 @@ class RegisterActivity : AppCompatActivity() {
                         name = name,
                         lastname = lastname,
                         phone = phone,
-                        email = email
+                        email = email,
+                        rutcar = ruta
                     )
 
                     conductorProvider.create(conductor).addOnCompleteListener{
@@ -87,7 +89,7 @@ class RegisterActivity : AppCompatActivity() {
 
     //Validar Formulario
 
-    private fun isValidForm(name:String, lastname:String, phone:String, email:String, password:String,
+    private fun isValidForm(name:String, lastname:String, phone:String, email:String, ruta:String , password:String,
                             confirmpassword:String):Boolean{
         if (name.isEmpty()){
             Toast.makeText(this, "Ingresa tu nombre", Toast.LENGTH_SHORT).show()
@@ -105,6 +107,12 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this, "Ingresa tu correo electronico", Toast.LENGTH_SHORT).show()
             return false
         }
+
+        if (ruta.isEmpty()){
+            Toast.makeText(this, "Ingresa la ruta", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
         if (password.isEmpty()){
             Toast.makeText(this, "Ingresa tu contraseña", Toast.LENGTH_SHORT).show()
             return false
